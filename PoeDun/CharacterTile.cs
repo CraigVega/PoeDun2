@@ -64,13 +64,23 @@ namespace PoeDun
             target.TakeDamage(this.attackPower); // deals damage equal to the characters attack power
         }
 
-        // override the abstract Display property from the Tile class
-       /* public override char Display
+        // method for healing the charater
+        public void Heal(int amount)
         {
-            get
+            hitPoints += amount;
+            if (hitPoints > maxHitPoints)
             {
-                return 'C'; // C represents the character
+                hitPoints = maxHitPoints; // makes sure hit points do not exceed maximum
             }
-        }*/
+        }
+
+        // override the abstract Display property from the Tile class
+        /* public override char Display
+         {
+             get
+             {
+                 return 'C'; // C represents the character
+             }
+         }*/
     }
 }
