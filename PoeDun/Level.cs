@@ -51,6 +51,7 @@ namespace PoeDun
             Wall,
             Hero, // added Hero to enum 
             Exit, // added Exit to enum
+            Pickup, // added Exit to enum
         }
 
         // property to expose the tiles array
@@ -78,6 +79,9 @@ namespace PoeDun
 
                 case TileType.Exit: // added case for ExitTile
                     tile = new ExitTile(position);
+                    break;
+                case TileType.Pickup: // added for PickupTile
+                    tile = new HealthPickupTile(position);
                     break;
 
                 default:
@@ -108,6 +112,9 @@ namespace PoeDun
 
                 case TileType.Exit:
                     tile = new ExitTile(new Position(x, y)); // added the Exit tile
+                    break;
+                case TileType.Pickup:
+                    tile = new HealthPickupTile(new Position(x, y));
                     break;
 
                 default:

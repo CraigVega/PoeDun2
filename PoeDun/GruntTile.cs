@@ -27,7 +27,20 @@ namespace PoeDun
 
         public override bool GetMove(out Tile targetTile)
         {
-            
+
+            foreach (Tile tile in vision)
+            {
+                if (tile is EmptyTile)  // checks if the tile is an EmptyTile
+                {
+                    // if found, set targetTile to this empty tile and return true
+                    targetTile = tile;
+                    return true;
+                }
+            }
+
+            // if no empty tile is found, set targetTile to null and return false
+            targetTile = null;
+            return false;
         }
     }
 }
