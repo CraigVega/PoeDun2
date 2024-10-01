@@ -8,7 +8,7 @@ namespace PoeDun
 {
     class GruntTile : EnemyTile
     {
-        public GruntTile(Position pos) : base( Position , 10 ,1 )
+        public GruntTile(Position pos) : base( pos , 10 ,1 )
         {
             
         }
@@ -18,9 +18,9 @@ namespace PoeDun
             get
             {
                 if (IsDead == true)
-                    return 'x'; // display "x" if the hero is dead
+                    return 'x'; // display "x" if the Grunt eniemies is dead
                 else
-                    return 'ⓧ'; // displays "▼" if the hero is alive
+                    return 'Ϫ'; // displays "Ϫ" if the Grunt eniemies is alive
             }
         }
     }
