@@ -8,9 +8,10 @@ namespace PoeDun
 {
     class GruntTile : EnemyTile
     {
+        Position posGrunt;
         public GruntTile(Position pos) : base( pos , 10 ,1 )
         {
-            
+            this.posGrunt = new Position(pos.xCord , pos.yCord);
         }
 
         public override char Display
@@ -22,6 +23,11 @@ namespace PoeDun
                 else
                     return 'Ϫ'; // displays "Ϫ" if the Grunt eniemies is alive
             }
+        }
+
+        public override bool GetMove(out Tile targetTile)
+        {
+            
         }
     }
 }

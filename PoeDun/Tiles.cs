@@ -18,7 +18,7 @@ namespace PoeDun
         public int posX
         {
             get { return posTile.xCord; }
-            //set { posTile.xCord = value; }
+           // set { posTile.xCord = value; }
         }
 
         public int posY
