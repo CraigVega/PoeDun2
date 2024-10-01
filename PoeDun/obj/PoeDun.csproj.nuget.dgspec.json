@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Craig\\source\\repos\\PoeDun5\\PoeDun\\PoeDun.csproj": {}
+    "C:\\Users\\Craig\\Source\\Repos\\PoeDun2.3\\PoeDun\\PoeDun.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Craig\\source\\repos\\PoeDun5\\PoeDun\\PoeDun.csproj": {
+    "C:\\Users\\Craig\\Source\\Repos\\PoeDun2.3\\PoeDun\\PoeDun.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Craig\\source\\repos\\PoeDun5\\PoeDun\\PoeDun.csproj",
+        "projectUniqueName": "C:\\Users\\Craig\\Source\\Repos\\PoeDun2.3\\PoeDun\\PoeDun.csproj",
         "projectName": "PoeDun",
-        "projectPath": "C:\\Users\\Craig\\source\\repos\\PoeDun5\\PoeDun\\PoeDun.csproj",
+        "projectPath": "C:\\Users\\Craig\\Source\\Repos\\PoeDun2.3\\PoeDun\\PoeDun.csproj",
         "packagesPath": "C:\\Users\\Craig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Craig\\source\\repos\\PoeDun5\\PoeDun\\obj\\",
+        "outputPath": "C:\\Users\\Craig\\Source\\Repos\\PoeDun2.3\\PoeDun\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
