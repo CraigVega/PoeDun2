@@ -14,14 +14,18 @@ namespace PoeDun
         int width;
         int height;
         HeroTile Hero;
-       
-        public Level(int width, int height, HeroTile Hero = null)
+
+        private PickupTile[] pickups; // array to store pickups in the level
+
+        public Level(int width, int height, int numberOfPickups, HeroTile Hero = null) // added numberOfPickups to constructor
         {
             this.width = width;
             this.height = height;
 
             tiles = new Tile[width, height];  // No need for Tile[,] tiles as we already declared it above in the field
             InitialiseTiles();
+
+            pickups = new PickupTile[numberOfPickups]; // initialize the pickups array with the given number of pickups
 
             // Place HeroTile
             Position randomHeroPos = GetRandomEmptyPosition();  // gets random empty position for hero
@@ -42,6 +46,12 @@ namespace PoeDun
             // places ExitTile after HeroTile
             Position exitPos = GetRandomEmptyPosition();  // gets random empty position for exit
             CreateTile(TileType.Exit, exitPos);  // creates and place ExitTile
+
+            for (int i = 0; i < numberOfPickups; i++) 
+            { 
+            Position pickupPos = GetRandomEmptyPosition();
+            pickups[i] = (PickupTile)CreateTile(TileType.Pickup, pickupPos);
+            }
         }
 
 
@@ -58,6 +68,12 @@ namespace PoeDun
         public Tile[,] Tiles
         {
             get { return tiles; }
+        }
+
+        // property to expose the pickups array
+        public PickupTile[] Pickups 
+        { 
+            get { return pickups; } 
         }
 
         private Tile CreateTile(TileType tiletype, Position position)
