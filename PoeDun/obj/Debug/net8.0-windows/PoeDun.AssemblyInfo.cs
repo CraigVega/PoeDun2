@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PoeDun")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7ef369804fc96fc3ae714d62295f16e985eb3d2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94abe0129e55000f9a9bec6053b242fcdbe55734")]
 [assembly: System.Reflection.AssemblyProductAttribute("PoeDun")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PoeDun")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

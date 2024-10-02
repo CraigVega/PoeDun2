@@ -22,6 +22,6 @@ namespace PoeDun
         public abstract bool GetMove(out Tile targetTile);
 
 
-        public abstract CharacterTile[] GetTarget(); // {  return CharacterTile[] targets ; }
+        public abstract CharacterTile[] GetTargets(); // {  return CharacterTile[] targets ; }
     }
 }
