@@ -14,6 +14,7 @@ namespace PoeDun
         Complete,
         GameOver
     }
+
     class GameEngine
     {
         private GameState gameState = GameState.InProgress;
@@ -23,21 +24,25 @@ namespace PoeDun
         private Level currentLevel;
         private int numLevels;
         private Random randomNum = new Random();
-        int width;
-        int height;
+        private int width;
+        private int height;
 
-
+        // constructor to initialize the GameEngine with the number of levels
         public GameEngine(int numLevels)
         {
-
             this.numLevels = numLevels;
-
             this.width = randomNum.Next(MIN_SIZE, MAX_SIZE);
             this.height = randomNum.Next(MIN_SIZE, MAX_SIZE);
-            this.currentLevel = new Level(this.width, this.height);
+            // initialize the first level with zero enemies and pickups (or any default values)
+            currentLevel = new Level(this.width, this.height, 3, 2);
         }
 
-
+        // method to create a new level with specified number of enemies and pickups
+        public void CreateNewLevel(int width, int height, int numberOfEnemies, int numberOfPickups)
+        {
+            // create a new level and pass the number of enemies and pickups
+            currentLevel = new Level(width, height, numberOfEnemies, numberOfPickups);
+        }
 
         public override string ToString()
         {
@@ -46,12 +51,8 @@ namespace PoeDun
                 MessageBox.Show("You have completed the game!");
             }
             return currentLevel.ToString();
-
         }
 
-
-
-       
         private bool MoveHero(Direction direct)
         {
             bool move = false;
@@ -81,12 +82,6 @@ namespace PoeDun
                     targetTileCheck = currentLevel.heroTile.vision[3];
                     numCheck = 3;
                     break;
-
-               // default:                      //Deafalt if nothing
-                //    targetTileCheck = null;
-                //    break;
-
-
             }
 
             if (targetTileCheck is ExitTile)
@@ -96,30 +91,23 @@ namespace PoeDun
                     NextLevel();
                     return true;
                 }
-
                 else
                 {
                     gameState = GameState.Complete;
                     return false;
-                    ToString();
                 }
             }
             else if (targetTileCheck is EmptyTile)
             {
-                currentLevel.SwopTiles(targetTileCheck , currentLevel.heroTile);
+                currentLevel.SwopTiles(targetTileCheck, currentLevel.heroTile);
                 Debug.WriteLine("Empty Tile");
                 currentLevel.heroTile.UpdateVision(currentLevel);
                 return true;
-        
             }
+
             Debug.WriteLine("Outside");
             return false;
-
-
-
         }
-
-
 
         public void TriggerMovement(Direction direct)
         {
@@ -130,17 +118,16 @@ namespace PoeDun
         {
             currentLevelNumber++; // increments the current level number
 
-            HeroTile currentHero = currentLevel.heroTile; // will temporarily store the current HeroTile
+            HeroTile currentHero = currentLevel.heroTile; // temporarily store the current HeroTile
 
             // generates a random size for the next level
-            Random random = new Random();
-            int newWidth = random.Next(MIN_SIZE, MAX_SIZE);
-            int newHeight = random.Next(MIN_SIZE, MAX_SIZE);
-            currentLevel = new Level(newWidth, newHeight, currentHero); // creates a new level with the stored HeroTile
+            int newWidth = randomNum.Next(MIN_SIZE, MAX_SIZE);
+            int newHeight = randomNum.Next(MIN_SIZE, MAX_SIZE);
 
-            gameState = GameState.InProgress; // will set the game state to InProgress for the new level
+            // creates a new level with the current hero, and specify the number of enemies and pickups
+            currentLevel = new Level(newWidth, newHeight, 3, 2, currentHero); // example values for enemies and pickups
+
+            gameState = GameState.InProgress; // set the game state to InProgress for the new level
         }
     }
-
-
 }

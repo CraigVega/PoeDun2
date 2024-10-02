@@ -10,20 +10,21 @@ namespace PoeDun
     public class Level
     {
         Tile[,] tiles;
-
+        private EnemyTile[] enemies; // array to store all the enemies
         int width;
         int height;
         HeroTile Hero;
 
         private PickupTile[] pickups; // array to store pickups in the level
 
-        public Level(int width, int height, int numberOfPickups, HeroTile Hero = null) // added numberOfPickups to constructor
+        public Level(int width, int height, int numberOfEnemies, int numberOfPickups, HeroTile Hero = null) // added numberOfPickups to constructor
         {
             this.width = width;
             this.height = height;
 
             tiles = new Tile[width, height];  // No need for Tile[,] tiles as we already declared it above in the field
             InitialiseTiles();
+            enemies = new EnemyTile[numberOfEnemies]; // initialize the enemies array
 
             pickups = new PickupTile[numberOfPickups]; // initialize the pickups array with the given number of pickups
 
@@ -47,13 +48,24 @@ namespace PoeDun
             Position exitPos = GetRandomEmptyPosition();  // gets random empty position for exit
             CreateTile(TileType.Exit, exitPos);  // creates and place ExitTile
 
-            for (int i = 0; i < numberOfPickups; i++) 
+            for (int i = 0; i < numberOfEnemies; i++) // loops through the number of enemies to initialize and place them in the level
+            {
+                Position enemyPos = GetRandomEmptyPosition(); // gets random empty position for enemy
+                enemies[i] = (EnemyTile)CreateTile(TileType.Enemy, enemyPos); // creates and places enemy
+            }
+
+            for (int i = 0; i < numberOfPickups; i++) // loops through the number of pickups to initialize and place them in the level
             { 
-            Position pickupPos = GetRandomEmptyPosition();
-            pickups[i] = (PickupTile)CreateTile(TileType.Pickup, pickupPos);
+                Position pickupPos = GetRandomEmptyPosition(); // gets random empty position for pickup
+                pickups[i] = (PickupTile)CreateTile(TileType.Pickup, pickupPos); // creates and places pickup
             }
         }
 
+        public Level(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
 
         enum TileType
         {
@@ -61,7 +73,8 @@ namespace PoeDun
             Wall,
             Hero, // added Hero to enum 
             Exit, // added Exit to enum
-            Pickup, // added Exit to enum
+            Pickup, // added pickup to enum
+            Enemy, // added Enemy to enum
         }
 
         // property to expose the tiles array
@@ -96,7 +109,10 @@ namespace PoeDun
                 case TileType.Exit: // added case for ExitTile
                     tile = new ExitTile(position);
                     break;
-                case TileType.Pickup: // added for PickupTile
+                case TileType.Enemy: // added case for EnemyTile
+                    tile = new GruntTile(position);
+                    break;
+                case TileType.Pickup: // added case for PickupTile
                     tile = new HealthPickupTile(position);
                     break;
 
@@ -129,8 +145,11 @@ namespace PoeDun
                 case TileType.Exit:
                     tile = new ExitTile(new Position(x, y)); // added the Exit tile
                     break;
+                case TileType.Enemy:
+                    tile = new GruntTile(new Position(x, y)); // added the Grunt tile
+                    break;
                 case TileType.Pickup:
-                    tile = new HealthPickupTile(new Position(x, y));
+                    tile = new HealthPickupTile(new Position(x, y)); // added the HealthPickup tile
                     break;
 
                 default:
@@ -140,6 +159,20 @@ namespace PoeDun
 
             tiles[x, y] = tile;
             return tiles[x, y];
+        }
+
+        // method to update the vision of hero enemies
+        public void UpdateVision()
+        {
+            Hero.UpdateVision(this); // update heros vision
+
+            foreach (var enemy in enemies) // iterates through each enemy in the enemies array
+            {
+                if (enemy != null) // checks if the current enemy exists
+                {
+                    enemy.UpdateVision(this); // update each enemies vision
+                }
+            }
         }
 
         public void InitialiseTiles()
