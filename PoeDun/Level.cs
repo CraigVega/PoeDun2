@@ -89,6 +89,12 @@ namespace PoeDun
             get { return pickups; } 
         }
 
+        //property to expose the Emeies  array ( for GameEngine)
+        public EnemyTile[] Enemies
+        {
+            get { return enemies; }
+        }
+
         private Tile CreateTile(TileType tiletype, Position position)
         {
             Tile tile;

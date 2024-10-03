@@ -26,6 +26,7 @@ namespace PoeDun
         private Random randomNum = new Random();
         private int width;
         private int height;
+        private int heroMoveCount = 0;
 
         // constructor to initialize the GameEngine with the number of levels
         public GameEngine(int numLevels)
@@ -34,11 +35,11 @@ namespace PoeDun
             this.width = randomNum.Next(MIN_SIZE, MAX_SIZE);
             this.height = randomNum.Next(MIN_SIZE, MAX_SIZE);
             // initialize the first level with zero enemies and pickups (or any default values)
-            currentLevel = new Level(this.width, this.height, 3, 2);
+            currentLevel = new Level(this.width, this.height, 1, 2);
         }
 
         // method to create a new level with specified number of enemies and pickups
-        public void CreateNewLevel(int width, int height, int numberOfEnemies, int numberOfPickups)
+        public void CreateNewLevel(int width, int height, int numberOfEnemies, int numberOfPickups) //Have not gotten this to work
         {
             // create a new level and pass the number of enemies and pickups
             currentLevel = new Level(width, height, numberOfEnemies, numberOfPickups);
@@ -102,6 +103,7 @@ namespace PoeDun
                 currentLevel.SwopTiles(targetTileCheck, currentLevel.heroTile);
                 Debug.WriteLine("Empty Tile");
                 currentLevel.heroTile.UpdateVision(currentLevel);
+                currentLevel.UpdateVision(); // Update the vision for both hero and enemies
                 return true;
             }
 
@@ -111,7 +113,16 @@ namespace PoeDun
 
         public void TriggerMovement(Direction direct)
         {
-            MoveHero(direct);
+            if (MoveHero(direct))
+            {
+                heroMoveCount++;
+
+                // Move enemies after every 2 successful hero moves
+                if (heroMoveCount % 2 == 0)
+                {
+                    MoveEnemies();
+                }
+            }
         }
 
         private void NextLevel()
@@ -124,10 +135,41 @@ namespace PoeDun
             int newWidth = randomNum.Next(MIN_SIZE, MAX_SIZE);
             int newHeight = randomNum.Next(MIN_SIZE, MAX_SIZE);
 
+            int numberOfEnemies = currentLevelNumber; // Increase number of enemies based on level number
             // creates a new level with the current hero, and specify the number of enemies and pickups
-            currentLevel = new Level(newWidth, newHeight, 3, 2, currentHero); // example values for enemies and pickups
+            //CreateNewLevel(newWidth, newHeight, numberOfEnemies, 2, currentHero); // Not working
+            currentLevel = new Level(newWidth, newHeight, numberOfEnemies, 2, currentHero);
 
             gameState = GameState.InProgress; // set the game state to InProgress for the new level
+        }
+
+        private void MoveEnemies()
+        {
+            EnemyTile currentEmemy;
+
+            foreach (EnemyTile enemy in currentLevel.Enemies)
+            {
+                if (enemy.IsDead)
+                {
+                    // Skip dead enemies
+                    continue;
+                }
+
+                // Get the next move for the enemy
+                if (enemy.GetMove(out Tile targetTile))
+                {
+                    // Check if the move is valid (targetTile should be an EmptyTile)
+                    if (targetTile is EmptyTile)
+                    {
+                        // Swap the enemy with the target tile
+                        currentLevel.SwopTiles(targetTile, enemy);
+
+                        // Update vision after moving the enemy
+                        currentLevel.UpdateVision();
+                    }
+                }
+            }
+
         }
     }
 }
