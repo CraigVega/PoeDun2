@@ -191,7 +191,41 @@ namespace PoeDun
 
         public void TriggerAttack(Direction direction)
         {
-            HeroAttack(direction);
+           // HeroAttack(direction);
+
+            if (HeroAttack(direction) == true)
+            {
+                EnemiesAttack();
+            }
+        }
+
+        private void EnemiesAttack()
+        {
+            foreach (EnemyTile enemy in currentLevel.Enemies)
+            {
+                if (enemy.IsDead)
+                {
+                    
+                    continue;
+                }
+
+                else
+                {
+                    //Debug.WriteLine("Else working");
+                    enemy.GetTargets();
+                    Debug.WriteLine("Target working");
+
+
+                    foreach (HeroTile target in enemy.GetTargets())
+                    {
+                       // currentLevel.Enemies.Attack(target);
+                        enemy.Attack(target);
+                    }
+
+                   
+                   
+                }
+            }
         }
     }
 }

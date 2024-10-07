@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,8 @@ namespace PoeDun
             {
                 hitPoints = 0; // makes sure that the hit points don't go below zero
             }
+
+            Debug.WriteLine(hitPoints); // using to see if the hero is losing  health
         }
 
         // method for attacking another character
