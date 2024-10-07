@@ -37,7 +37,7 @@ namespace PoeDun
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    gameEngine.TriggerMovement(Direction.up);
+                    gameEngine.TriggerMovement(Direction.up);//For movment
                     break;
 
                 case Keys.A:
@@ -52,6 +52,21 @@ namespace PoeDun
                     gameEngine.TriggerMovement(Direction.Down);
                     break;
 
+                case Keys.Up:
+                    gameEngine.TriggerAttack(Direction.up); //For the attack 
+                    break;
+
+                case Keys.Left:
+                    gameEngine.TriggerAttack(Direction.Left);
+                    break;
+
+                case Keys.Right:
+                    gameEngine.TriggerAttack(Direction.Right);
+                    break;
+
+                case Keys.Down:
+                    gameEngine.TriggerAttack(Direction.Down);
+                    break;
             }
 
             UpdateDisplay();

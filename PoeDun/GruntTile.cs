@@ -64,8 +64,8 @@ namespace PoeDun
         // returns an array of CharacterTile (targets), including HeroTile
         public override CharacterTile[] GetTargets()
         {
-            // array to store potential targets (maximum size is vision.Length)
-            CharacterTile[] targets = new CharacterTile[vision.Length];
+            
+            CharacterTile[] targets = new CharacterTile[vision.Length]; // array to store potential targets (maximum size is vision.Length)
             int targetCount = 0; // counter to track how many targets are found
 
             // loops through the grunt's vision array
@@ -79,16 +79,15 @@ namespace PoeDun
                 }
             }
 
-            // create a new array with the exact number of found targets
-            CharacterTile[] foundTargets = new CharacterTile[targetCount];
+            
+            CharacterTile[] foundTargets = new CharacterTile[targetCount]; // create a new array with the exact number of found targets
 
-            // copy the found targets to the new array
+
             for (int i = 0; i < targetCount; i++)
             {
-                foundTargets[i] = targets[i];
+                foundTargets[i] = targets[i]; // copyies the found targets to the new array
             }
 
-            // return the array of found targets or an empty array
             return foundTargets;
         }
     }

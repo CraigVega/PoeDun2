@@ -171,5 +171,27 @@ namespace PoeDun
             }
 
         }
+
+        private bool HeroAttack(Direction direction)
+        {
+            
+            Tile AttackTargetTile = currentLevel.heroTile.vision[(int)direction];
+
+            if (AttackTargetTile is CharacterTile targetCharacterTile)
+            {
+                currentLevel.heroTile.Attack(targetCharacterTile);
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+
+        public void TriggerAttack(Direction direction)
+        {
+            HeroAttack(direction);
+        }
     }
 }
