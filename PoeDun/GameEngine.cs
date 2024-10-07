@@ -50,6 +50,7 @@ namespace PoeDun
             if (gameState == GameState.Complete)
             {
                 MessageBox.Show("You have completed the game!");
+                
             }
             return currentLevel.ToString();
         }
@@ -113,15 +114,23 @@ namespace PoeDun
 
         public void TriggerMovement(Direction direct)
         {
-            if (MoveHero(direct))
+            if (gameState == GameState.InProgress)
             {
-                heroMoveCount++;
-
-                // Move enemies after every 2 successful hero moves
-                if (heroMoveCount % 2 == 0)
+                if (MoveHero(direct))
                 {
-                    MoveEnemies();
+                    heroMoveCount++;
+
+                   
+                    if (heroMoveCount % 2 == 0)  // Move enemies after every 2 successful hero moves as the % gets if the number is divisible by 2
+                    {
+                        MoveEnemies();
+                    }
                 }
+            }
+
+            else
+            {
+                //stuff
             }
         }
 
@@ -191,11 +200,24 @@ namespace PoeDun
 
         public void TriggerAttack(Direction direction)
         {
-           // HeroAttack(direction);
-
-            if (HeroAttack(direction) == true)
+            // HeroAttack(direction);
+            if (gameState == GameState.InProgress)
             {
-                EnemiesAttack();
+                if (HeroAttack(direction) == true)
+                {
+                    EnemiesAttack();
+
+                    if (currentLevel.heroTile.IsDead)
+                    {
+                        gameState = GameState.GameOver;
+                    }
+                }
+
+            }
+
+            else
+            {
+                //stuff
             }
         }
 
@@ -227,5 +249,8 @@ namespace PoeDun
                 }
             }
         }
+
+       
+        
     }
 }

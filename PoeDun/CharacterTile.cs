@@ -85,5 +85,11 @@ namespace PoeDun
                  return 'C'; // C represents the character
              }
          }*/
+
+        public string HeroStats
+        {
+            get { return Convert.ToString(hitPoints) + "/" + Convert.ToString(maxHitPoints); }
+
+        }
     }
 }

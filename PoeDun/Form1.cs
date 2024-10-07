@@ -25,6 +25,7 @@ namespace PoeDun
         {
 
             lblDisplay.Text = gameEngine.ToString();
+            lblHealth.Text = HeroStates.Tostring();
         }
 
         private void lblDisplay_Click(object sender, EventArgs e)

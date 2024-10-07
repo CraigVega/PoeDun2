@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             lblDisplay = new Label();
+            lblHealth = new Label();
             SuspendLayout();
             // 
             // lblDisplay
@@ -41,11 +42,21 @@
             lblDisplay.Text = "Display";
             lblDisplay.Click += lblDisplay_Click;
             // 
+            // lblHealth
+            // 
+            lblHealth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHealth.Location = new Point(688, 58);
+            lblHealth.Name = "lblHealth";
+            lblHealth.Size = new Size(72, 41);
+            lblHealth.TabIndex = 1;
+            lblHealth.Text = "Health";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblHealth);
             Controls.Add(lblDisplay);
             Name = "Form1";
             Text = "Form1";
@@ -55,5 +66,6 @@
         #endregion
 
         private Label lblDisplay;
+        private Label lblHealth;
     }
 }
