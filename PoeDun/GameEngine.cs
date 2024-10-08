@@ -27,6 +27,7 @@ namespace PoeDun
         private int width;
         private int height;
         private int heroMoveCount = 0;
+        
 
         // constructor to initialize the GameEngine with the number of levels
         public GameEngine(int numLevels)
@@ -36,6 +37,7 @@ namespace PoeDun
             this.height = randomNum.Next(MIN_SIZE, MAX_SIZE);
             // initialize the first level with zero enemies and pickups (or any default values)
             currentLevel = new Level(this.width, this.height, 1, 2);
+            
         }
 
         // method to create a new level with specified number of enemies and pickups
@@ -99,6 +101,17 @@ namespace PoeDun
                     return false;
                 }
             }
+            else if (targetTileCheck is PickupTile pickupTile)
+            {
+                
+                pickupTile.ApplyEffect(currentLevel.heroTile); // applies the effect of the pickup
+                currentLevel.SwopTiles(new EmptyTile(targetTileCheck.Pos), currentLevel.heroTile); // replaces PickupTile with EmptyTile
+                Debug.WriteLine("Picked up item");
+                currentLevel.heroTile.UpdateVision(currentLevel);
+                currentLevel.UpdateVision();
+                return true;
+            }
+
             else if (targetTileCheck is EmptyTile)
             {
                 currentLevel.SwopTiles(targetTileCheck, currentLevel.heroTile);
