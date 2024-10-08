@@ -14,10 +14,11 @@ namespace PoeDun
         int width;
         int height;
         HeroTile Hero;
+        ExitTile Exit;
 
         private PickupTile[] pickups; // array to store pickups in the level
 
-        public Level(int width, int height, int numberOfEnemies, int numberOfPickups, HeroTile Hero = null) // added numberOfPickups to constructor
+        public Level(int width, int height, int numberOfEnemies, int numberOfPickups, HeroTile Hero = null, ExitTile exit = null) // added numberOfPickups to constructor
         {
             this.width = width;
             this.height = height;
@@ -44,9 +45,20 @@ namespace PoeDun
                 this.Hero = Hero;
             }
 
+
+
             // places ExitTile after HeroTile
             Position exitPos = GetRandomEmptyPosition();  // gets random empty position for exit
-            CreateTile(TileType.Exit, exitPos);  // creates and place ExitTile
+            if (Exit == null)
+            {
+               this.Exit = (ExitTile)CreateTile(TileType.Exit, exitPos);  // creates and place ExitTile
+            }
+            else
+            {
+                Exit.Pos = exitPos;
+                tiles[exitPos.xCord, exitPos.yCord] = Exit;
+                this.Exit = Exit;
+            }
 
             for (int i = 0; i < numberOfEnemies; i++) // loops through the number of enemies to initialize and place them in the level
             {
@@ -238,13 +250,18 @@ namespace PoeDun
 
         private Position GetRandomEmptyPosition()
         {
+
+
             Random randomNum = new Random();
 
             int rEmptyX = randomNum.Next(1, width - 1);
             int rEmptyY = randomNum.Next(1, height - 1);
 
 
-            //Position HeroXY = new Position(rEmptyX, rEmptyY);
+            //Position Check = new Position(rEmptyX, rEmptyY);
+
+           // if (Check ==  
+            
 
             return new Position(rEmptyX, rEmptyY);
 
