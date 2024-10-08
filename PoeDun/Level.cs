@@ -250,22 +250,27 @@ namespace PoeDun
 
         private Position GetRandomEmptyPosition()
         {
-
-
             Random randomNum = new Random();
+            Position position;
+            int maxAttempts = 100;  // To prevent infinite loops in case of a crowded grid.
 
-            int rEmptyX = randomNum.Next(1, width - 1);
-            int rEmptyY = randomNum.Next(1, height - 1);
+            do
+            {
+                int rEmptyX = randomNum.Next(1, width - 1);
+                int rEmptyY = randomNum.Next(1, height - 1);
+                position = new Position(rEmptyX, rEmptyY);
 
+                // checks if the tile at this position is empty
+                if (tiles[rEmptyX, rEmptyY] is EmptyTile)
+                {
+                    return position; // found an empty position
+                }
 
-            //Position Check = new Position(rEmptyX, rEmptyY);
+                maxAttempts--;
+            } while (maxAttempts > 0);
 
-           // if (Check ==  
-            
-
-            return new Position(rEmptyX, rEmptyY);
-
-
+            // if no empty position is found after many tries throw an exception
+            throw new Exception("Unable to find an empty position on the grid.");
         }
 
         public HeroTile heroTile

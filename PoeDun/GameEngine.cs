@@ -133,18 +133,25 @@ namespace PoeDun
                 {
                     heroMoveCount++;
 
-                   
+                    if (currentLevel.heroTile.IsDead) // checks if hero is dead after moving
+                    {
+                        gameState = GameState.GameOver;
+                        MessageBox.Show("The hero has died! Game Over.");
+                        return;
+                    }
+
                     if (heroMoveCount % 2 == 0)  // Move enemies after every 2 successful hero moves as the % gets if the number is divisible by 2
                     {
                         MoveEnemies();
                     }
-                }
-            }
 
-            else
-            {
-                //stuff
-            }
+                    if (currentLevel.heroTile.IsDead) // checks again after enemies move if the hero died
+                    {
+                        gameState = GameState.GameOver;
+                        MessageBox.Show("The hero has died! Game Over.");
+                    }
+                }
+            }            
         }
 
         private void NextLevel()
@@ -213,7 +220,7 @@ namespace PoeDun
 
         public void TriggerAttack(Direction direction)
         {
-            // HeroAttack(direction);
+           
             if (gameState == GameState.InProgress)
             {
                 if (HeroAttack(direction) == true)
@@ -223,18 +230,11 @@ namespace PoeDun
                     if (currentLevel.heroTile.IsDead)
                     {
                         gameState = GameState.GameOver;
+                        MessageBox.Show("The hero has died! Game Over.");
                     }
                 }
 
-            }
-
-            else
-            {
-               // if (gameState == GameState.GameOver)
-               // {
-
-                //}
-            }
+            }            
         }
 
         private void EnemiesAttack()
