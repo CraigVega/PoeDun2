@@ -230,7 +230,10 @@ namespace PoeDun
 
             else
             {
-                //stuff
+               // if (gameState == GameState.GameOver)
+               // {
+
+                //}
             }
         }
 
