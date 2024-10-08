@@ -86,10 +86,33 @@ namespace PoeDun
              }
          }*/
 
-        public string HeroStats
+        public int HitPoints
+        {
+           get { return hitPoints; }
+            set { hitPoints = value; }
+        }
+
+        public int MaxHitPoints
+        {
+          get { return maxHitPoints; }
+          set {  maxHitPoints = value; }  
+        }
+
+        /*public string HeroStats
         {
             get { return Convert.ToString(hitPoints) + "/" + Convert.ToString(maxHitPoints); }
 
         }
+
+        public string HealthDisplay()
+        {
+            return HeroStats;
+        }
+        */
+
+        //public string HitPoints()
+        //{
+        //    return Convert.ToString(hitPoints);
+        //}
     }
 }

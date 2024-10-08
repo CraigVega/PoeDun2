@@ -27,13 +27,19 @@ namespace PoeDun
             }
         }
 
-        public int HitPoints 
-        { 
-            get; 
-        }
-        public int AttackPower 
-        { 
-            get; 
-        }
+       // public int HitPoints 
+        //{ 
+        //   get { return HitPoints; }
+       // }
+       // public int AttackPower 
+       // { 
+            //get; 
+       // }
+
+        //public int MaxHitPoints
+        //{
+        //    get;
+
+       // }
     }
 }

@@ -250,7 +250,16 @@ namespace PoeDun
             }
         }
 
-       
-        
+       public string HeroStats
+        {
+            get { return Convert.ToString(currentLevel.heroTile.HitPoints) + "/" + Convert.ToString(currentLevel.heroTile.MaxHitPoints); }
+
+        }
+
+        public string HealthDisplay()
+        {
+            return HeroStats;
+        }
+      
     }
 }
